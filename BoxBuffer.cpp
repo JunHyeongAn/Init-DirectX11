@@ -6,16 +6,17 @@ CBoxBuffer::CBoxBuffer(ID3D11Device* _pDevice, ID3D11DeviceContext* _pContext)
 {
 }
 
-CBoxBuffer::~CBoxBuffer()
-{
-	Free();
-}
-
 CBoxBuffer* CBoxBuffer::Create(ID3D11Device* _pDevice, ID3D11DeviceContext* _pContext)
 {
 	CBoxBuffer* pBoxBuffer = new CBoxBuffer(_pDevice, _pContext);
 
+	if (!pBoxBuffer) {
+		MSG_BOX("pBoxBuffer Create Failed!!");
+		return nullptr;
+	}
+
 	if (FAILED(pBoxBuffer->Init())) {
+		MSG_BOX("pBoxBuffer Init Failed!!");
 		return nullptr;
 	}
 
@@ -26,10 +27,10 @@ HRESULT CBoxBuffer::Init()
 {
 	HRESULT hr{};
 
-	m_iVertexNum				= 8;
-	m_iVertexStride				= sizeof(VTX_POS_COLOR);
-
 #pragma region VERTEX
+	m_iVertexNum = 8;
+	m_iVertexStride = sizeof(VTX_POS_COLOR);
+
 	VTX_POS_COLOR vertices[] = {
 		{
 			XMFLOAT3(-1.f, -1.f, -1.f)
@@ -86,17 +87,32 @@ HRESULT CBoxBuffer::Init()
 #pragma endregion
 
 #pragma region INDEX
-	m_iIndexNum = 24;
+	m_iIndexNum = 36;
 
 	UINT indecies[] = {
-		0,1,2,
-		0,2,3,
-		0,3,4,
-		0,4,5,
-		0,5,6,
-		0,6,7,
-		0,7,8,
-		0,8,1
+		// front face
+		0, 1, 2,
+		0, 2, 3,
+
+		// back face
+		4, 6, 5,
+		4, 7, 6,
+
+		// left face
+		4, 5, 1,
+		4, 1, 0,
+
+		// right face
+		3, 2, 6,
+		3, 6, 7,
+
+		// top face
+		1, 5, 6,
+		1, 6, 2,
+
+		// bottom face
+		4, 0, 3,
+		4, 3, 7
 	};
 
 	D3D11_BUFFER_DESC indexDesc{};
@@ -127,6 +143,17 @@ HRESULT CBoxBuffer::Init()
 
 void CBoxBuffer::Bind()
 {
+	D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
+	};
+
+	/*m_pDevice->CreateInputLayout(
+		vertexDesc
+		, 2
+		, 
+	)*/
+
 	m_pContext->IASetVertexBuffers(
 		0,
 		1,
@@ -142,6 +169,7 @@ void CBoxBuffer::Bind()
 
 void CBoxBuffer::Render()
 {
+	
 }
 
 

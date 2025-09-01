@@ -4,11 +4,38 @@
     <Filter Include="Common">
       <UniqueIdentifier>{6a885e4d-e075-461e-bfae-f0cc088d207b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VIBuffer">
+    <Filter Include="Components">
+      <UniqueIdentifier>{553fe8dd-b7b4-47c8-bb36-37ccb2adc8c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\VIBuffer">
       <UniqueIdentifier>{15e8aed7-a3db-4247-b6ee-e036f0c7b195}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VIBuffer\BoxBuffer">
+    <Filter Include="Components\VIBuffer\BoxBuffer">
       <UniqueIdentifier>{f990fa64-347b-4e4a-8604-f4789614577e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{5177cd4c-6882-4c21-95db-621b384dd8d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Defines">
+      <UniqueIdentifier>{d30419ed-eeff-4bc9-bd59-3a0dfb14908d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{48c12927-195f-4916-a57c-e6397e631913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{bae5245d-9242-4160-a86e-94af78ba3f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Box">
+      <UniqueIdentifier>{79c16def-41a6-45f6-ad2b-05a174ff72a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Shader">
+      <UniqueIdentifier>{f5c10157-1519-4431-8a48-f5167ca807dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Shader\DefaultShader">
+      <UniqueIdentifier>{a7fbd93c-e4fb-4c0e-9647-95821f297a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FX">
+      <UniqueIdentifier>{91365924-fc73-4076-95e2-ff09469358f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -22,12 +49,30 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="BoxBuffer.cpp">
-      <Filter>VIBuffer\BoxBuffer</Filter>
+      <Filter>Components\VIBuffer\BoxBuffer</Filter>
     </ClCompile>
     <ClCompile Include="VIBuffer.cpp">
-      <Filter>VIBuffer</Filter>
+      <Filter>Components\VIBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="Init Direct3D.cpp" />
+    <ClCompile Include="BoxProject.cpp" />
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxObject.cpp">
+      <Filter>GameObject\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Components\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultShader.cpp">
+      <Filter>Components\Shader\DefaultShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3dApp.h">
@@ -40,13 +85,34 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="BoxBuffer.h">
-      <Filter>VIBuffer\BoxBuffer</Filter>
+      <Filter>Components\VIBuffer\BoxBuffer</Filter>
     </ClInclude>
     <ClInclude Include="VIBuffer.h">
-      <Filter>VIBuffer</Filter>
+      <Filter>Components\VIBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>Common</Filter>
+      <Filter>Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxObject.h">
+      <Filter>GameObject\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Components\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultShader.h">
+      <Filter>Components\Shader\DefaultShader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

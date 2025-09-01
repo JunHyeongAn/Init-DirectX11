@@ -4,9 +4,8 @@
 class CBoxBuffer final : public CVIBuffer
 {
 private:
-	CBoxBuffer() = default;
 	CBoxBuffer(ID3D11Device* _pDevice, ID3D11DeviceContext* _pContext);
-	~CBoxBuffer();
+	~CBoxBuffer() = default;
 
 public:
 	// CVIBuffer을(를) 통해 상속됨

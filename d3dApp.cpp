@@ -5,6 +5,7 @@
 #include "d3dApp.h"
 #include <WindowsX.h>
 #include <sstream>
+#include "Define.h"
 
 namespace
 {
@@ -321,6 +322,9 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEMOVE:
 		OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		return 0;
+
+	case WM_QUIT:
+		return 0;
 	}
 
 	return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -355,6 +359,7 @@ bool D3DApp::InitMainWindow()
 
 	mhMainWnd = CreateWindow(L"D3DWndClassName", mMainWndCaption.c_str(), 
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, width, height, 0, 0, mhAppInst, 0); 
+
 	if( !mhMainWnd )
 	{
 		MessageBox(0, L"CreateWindow Failed.", 0, 0);

@@ -1,16 +1,15 @@
 #pragma once
 #include "d3dUtil.h"
+#include "Component.h"
 
-class CVIBuffer abstract
+class CVIBuffer :public CComponent
 {
 protected:
-	CVIBuffer();
 	CVIBuffer(ID3D11Device* _pDevice, ID3D11DeviceContext* _pContext);
-	virtual ~CVIBuffer();
+	CVIBuffer(CVIBuffer& _pPrototype);
+	virtual ~CVIBuffer() = default;
 
 protected:
-	ID3D11Device*			m_pDevice{ nullptr };
-	ID3D11DeviceContext*	m_pContext{ nullptr };
 
 	ID3D11Buffer*			m_pVB{ nullptr };
 	ID3D11Buffer*			m_pIB{ nullptr };
@@ -21,9 +20,12 @@ protected:
 	UINT					m_iIndexNum{};
 
 protected:
-	virtual HRESULT Init() = 0;
-	virtual void Bind() = 0;
-	virtual void Render() = 0;
-	virtual void Free();
+	// CComponent을(를) 통해 상속됨
+	void Free() override;
+
+public:
+	virtual HRESULT Init() PURE;
+	virtual void Bind() PURE;
+	virtual void Render() PURE;
 };
 

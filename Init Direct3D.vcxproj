@@ -148,23 +148,36 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;D3DCompiler.lib;Effects11d.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;D3DCompiler.lib;Effects11.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Base.cpp" />
     <ClCompile Include="BoxBuffer.cpp" />
+    <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="DefaultShader.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="d3dApp.cpp" />
     <ClCompile Include="d3dUtil.cpp" />
     <ClCompile Include="GameTimer.cpp" />
-    <ClCompile Include="Init Direct3D.cpp" />
+    <ClCompile Include="BoxProject.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="VIBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base.h" />
     <ClInclude Include="BoxBuffer.h" />
+    <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="DefaultShader.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="d3dApp.h" />
     <ClInclude Include="d3dUtil.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="GameTimer.h" />
+    <ClInclude Include="Macro.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="VIBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
