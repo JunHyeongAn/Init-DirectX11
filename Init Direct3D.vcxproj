@@ -22,7 +22,7 @@
     <ProjectGuid>{415A387B-CAA1-453C-9C2F-EAAF8094859E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>InitDirect3D</RootNamespace>
-    <ProjectName>BoxPractice</ProjectName>
+    <ProjectName>Init-DirectX11</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -161,8 +161,9 @@
     <ClCompile Include="d3dApp.cpp" />
     <ClCompile Include="d3dUtil.cpp" />
     <ClCompile Include="GameTimer.cpp" />
-    <ClCompile Include="BoxProject.cpp" />
+    <ClCompile Include="Init-DirectX11.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VIBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="BoxBuffer.h" />
     <ClInclude Include="BoxObject.h" />
     <ClInclude Include="DefaultShader.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="d3dApp.h" />
@@ -178,7 +180,11 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="VIBuffer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

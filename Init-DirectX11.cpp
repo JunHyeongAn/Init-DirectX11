@@ -7,6 +7,7 @@
 //***************************************************************************************
 
 #include "d3dApp.h"
+#include "Define.h"
 
 class InitDirect3DApp : public D3DApp
 {
@@ -19,7 +20,9 @@ public:
 	void UpdateScene(float dt);
 	void DrawScene(); 
 
-	void BuildFx();
+public:
+	XMFLOAT4X4 m_projMatrix;
+	XMFLOAT4X4 m_viewMatrix;
 };
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
@@ -76,13 +79,4 @@ void InitDirect3DApp::DrawScene()
 	if (FAILED(mSwapChain->Present(0, 0))) {
 		return;
 	}
-}
-
-void InitDirect3DApp::BuildFx()
-{
-	DWORD shaderFlags = 0;
-#if defined( DEBUG ) || defined( _DEBUG )
-	shaderFlags |= D3D10_SHADER_DEBUG;
-	shaderFlags |= D3D10_SHADER_SKIP_OPTIMIZATION;
-#endif
 }

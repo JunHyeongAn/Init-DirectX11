@@ -9,11 +9,15 @@ private:
 	virtual ~CDefaultShader() = default;
 
 public:
-	static CDefaultShader* Create(ID3D11Device* _pDevice, ID3D11DeviceContext* _pContext);
+	static CDefaultShader* Create(
+		ID3D11Device* _pDevice
+		, ID3D11DeviceContext* _pContext
+		, SHADER_DESC& _pDesc
+	);
 
 private:
 	// CShader을(를) 통해 상속됨
-	HRESULT Init() override;
+	HRESULT Init(SHADER_DESC& _pDesc) override;
 	void Free() override;
 };
 

@@ -18,4 +18,7 @@ typedef struct VertexPosColor {
 
 #define MSG_BOX(str) MessageBox(0, L##str, 0, 0);
 
+#define	ENUM_CLASS(ENUM) static_cast<unsigned int>(ENUM)
+
 #include "Macro.h"
+#include "Enums.h"
