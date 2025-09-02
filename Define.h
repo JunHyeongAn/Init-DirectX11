@@ -11,14 +11,15 @@
 using namespace DirectX;
 using namespace std;
 
+#include "Macro.h"
+
 typedef struct VertexPosColor {
-	XMFLOAT3 Pos;
-	XMFLOAT4 Color;
+	_float3 vPos;
+	_float4 vColor;
 } VTX_POS_COLOR;
 
 #define MSG_BOX(str) MessageBox(0, L##str, 0, 0);
 
 #define	ENUM_CLASS(ENUM) static_cast<unsigned int>(ENUM)
 
-#include "Macro.h"
 #include "Enums.h"

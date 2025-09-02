@@ -9,7 +9,7 @@ public:
         const char* szTechName;
         const D3D11_INPUT_ELEMENT_DESC* pElementDesc;
         _uint iElementNum;
-        _uint iPassNum;
+        D3D11_PRIMITIVE_TOPOLOGY eTopology;
     } SHADER_DESC;
 
 protected:
@@ -26,13 +26,13 @@ protected:
     _uint                       m_iNumPasses{};
 
     vector<ID3D11InputLayout*>  m_pInputLayouts{};
-
-public:
-    LPD3D11EFFECTTECHNIQUE Get_Tech() const;
-    void                   Set_IL(ID3D11InputLayout* _pInputLayout);
+    SHADER_DESC                 m_tDesc;
 
 protected:
     virtual HRESULT Init(SHADER_DESC& _pDesc) PURE;
+
+public:
+    virtual void Begin(_uint _iPassNum) PURE;
 
 protected:
     // CComponent을(를) 통해 상속됨

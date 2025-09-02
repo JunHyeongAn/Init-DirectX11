@@ -34,6 +34,11 @@ CDefaultShader* CDefaultShader::Create(
 HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 {
 	_uint		iHlslFlag = {};
+	m_tDesc.eTopology		= _pDesc.eTopology;
+	m_tDesc.iElementNum		= _pDesc.iElementNum;
+	m_tDesc.pElementDesc	= _pDesc.pElementDesc;
+	m_tDesc.szFilePath		= _pDesc.szFilePath;
+	m_tDesc.szTechName		= _pDesc.szTechName;
 
 #ifdef _DEBUG
 	iHlslFlag = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
@@ -92,6 +97,18 @@ HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 	return S_OK;
 }
 
+void CDefaultShader::Begin(_uint _iPassNum)
+{
+	m_pContext->IASetInputLayout(m_pInputLayouts[_iPassNum]);
+	m_pContext->IASetPrimitiveTopology(m_tDesc.eTopology);
+
+	m_pEffect
+		->GetTechniqueByName(m_tDesc.szTechName)
+		->GetPassByIndex(_iPassNum)
+		->Apply(0, m_pContext);
+}
+
 void CDefaultShader::Free()
 {
+	__super::Free();
 }

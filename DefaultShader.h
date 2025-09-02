@@ -14,6 +14,7 @@ public:
 		, ID3D11DeviceContext* _pContext
 		, SHADER_DESC& _pDesc
 	);
+	void Begin(_uint _iPassNum) override;
 
 private:
 	// CShader을(를) 통해 상속됨

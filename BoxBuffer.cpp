@@ -27,6 +27,10 @@ HRESULT CBoxBuffer::Init()
 {
 	HRESULT hr{};
 
+	m_tDesces = Layout::PosColor;
+	m_iDescCnt = Layout::PosColorCnt;
+	m_eTopology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+
 #pragma region VERTEX
 	m_iVertexNum = 8;
 	m_iVertexStride = sizeof(VTX_POS_COLOR);
@@ -143,17 +147,6 @@ HRESULT CBoxBuffer::Init()
 
 void CBoxBuffer::Bind()
 {
-	D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
-	};
-
-	/*m_pDevice->CreateInputLayout(
-		vertexDesc
-		, 2
-		, 
-	)*/
-
 	m_pContext->IASetVertexBuffers(
 		0,
 		1,

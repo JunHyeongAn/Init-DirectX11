@@ -8,6 +8,7 @@
 
 #include "d3dApp.h"
 #include "Define.h"
+#include "BoxObject.h"
 
 class InitDirect3DApp : public D3DApp
 {
@@ -18,11 +19,9 @@ public:
 	bool Init();
 	void OnResize();
 	void UpdateScene(float dt);
-	void DrawScene(); 
+	void DrawScene();
 
-public:
-	XMFLOAT4X4 m_projMatrix;
-	XMFLOAT4X4 m_viewMatrix;
+	CBoxObject* m_pBoxObject{ nullptr };
 };
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
@@ -37,7 +36,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	
 	if( !theApp.Init() )
 		return 0;
-	
+
 	return theApp.Run();
 }
 
@@ -55,6 +54,8 @@ bool InitDirect3DApp::Init()
 	if(!D3DApp::Init())
 		return false;
 
+	m_pBoxObject = CBoxObject::Create(md3dDevice, md3dImmediateContext);
+
 	return true;
 }
 
@@ -65,18 +66,12 @@ void InitDirect3DApp::OnResize()
 
 void InitDirect3DApp::UpdateScene(float dt)
 {
-
+	m_pBoxObject->Update(dt);
 }
 
 void InitDirect3DApp::DrawScene()
 {
-	assert(md3dImmediateContext);
-	assert(mSwapChain);
-
 	md3dImmediateContext->ClearRenderTargetView(mRenderTargetView, reinterpret_cast<const float*>(&Colors::Blue));
 	md3dImmediateContext->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH|D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-	if (FAILED(mSwapChain->Present(0, 0))) {
-		return;
-	}
+	m_pBoxObject->Render();
 }
