@@ -1,3 +1,6 @@
+float4x4 g_World;
+float4x4 g_WVP;
+
 struct VS_IN
 {
     float3 vPos : POSITION;
@@ -14,7 +17,7 @@ VS_OUT VS_MAIN( VS_IN In )
 {
     VS_OUT vsOut;
     
-    vsOut.vPos = float4(In.vPos, 1.f);
+    vsOut.vPos = mul(float4(In.vPos, 1.f), g_WVP);
     vsOut.vColor = In.vColor;
     
     return vsOut;

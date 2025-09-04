@@ -33,7 +33,7 @@ CDefaultShader* CDefaultShader::Create(
 
 HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 {
-	_uint		iHlslFlag = {};
+	_uint		iHlslFlag = D3DCOMPILE_ENABLE_STRICTNESS;
 	m_tDesc.eTopology		= _pDesc.eTopology;
 	m_tDesc.iElementNum		= _pDesc.iElementNum;
 	m_tDesc.pElementDesc	= _pDesc.pElementDesc;
@@ -67,6 +67,10 @@ HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 		return E_FAIL;
 	}
 
+	/*hr = D3DX11CreateEffectFromMemory(
+
+	)*/
+
 	D3DX11_TECHNIQUE_DESC tTechDesc;
 	LPD3D11EFFECTTECHNIQUE pTech = m_pEffect->GetTechniqueByName(_pDesc.szTechName);
 
@@ -88,13 +92,17 @@ HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 
 		pPass->GetDesc(&tPassDesc);
 
-		m_pDevice->CreateInputLayout(
+		HRESULT hr = m_pDevice->CreateInputLayout(
 			_pDesc.pElementDesc
 			, _pDesc.iElementNum
 			, tPassDesc.pIAInputSignature
 			, tPassDesc.IAInputSignatureSize
 			, &pInputLayout
 		);
+
+		if (FAILED(hr)) {
+			return E_FAIL;
+		}
 
 		m_pInputLayouts.push_back(pInputLayout);
 	}
@@ -111,6 +119,11 @@ void CDefaultShader::Begin(_uint _iPassNum)
 		->GetTechniqueByName(m_tDesc.szTechName)
 		->GetPassByIndex(_iPassNum)
 		->Apply(0, m_pContext); 
+}
+
+LPD3D11EFFECT CShader::Get_Effect() const
+{
+	return m_pEffect;
 }
 
 void CDefaultShader::Free()

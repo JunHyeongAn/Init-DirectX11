@@ -15,4 +15,7 @@ typedef XMMATRIX			_matrix;
 typedef XMVECTOR			_vector;
 typedef FXMVECTOR			_fvector;
 
+// ¼ÎÀÌ´õ¿ë
+typedef ID3DX11EffectMatrixVariable* _lpEffectMatrix;
+
 #define PURE = 0

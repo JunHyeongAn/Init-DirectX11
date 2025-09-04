@@ -15,6 +15,9 @@ namespace
 	D3DApp* gd3dApp = 0;
 }
 
+_uint g_iWidth = 0.0f;
+_uint g_iHeight = 0.0f;
+
 LRESULT CALLBACK
 MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -42,7 +45,8 @@ D3DApp::D3DApp(HINSTANCE hInstance)
 	mSwapChain(0),
 	mDepthStencilBuffer(0),
 	mRenderTargetView(0),
-	mDepthStencilView(0)
+	mDepthStencilView(0),
+	m_pDepthStencilState(nullptr)
 {
 	ZeroMemory(&mScreenViewport, sizeof(D3D11_VIEWPORT));
 
@@ -197,6 +201,16 @@ void D3DApp::OnResize()
 	mScreenViewport.MaxDepth = 1.0f;
 
 	md3dImmediateContext->RSSetViewports(1, &mScreenViewport);
+
+	// 깊이/스텐실 상태 생성
+	D3D11_DEPTH_STENCIL_DESC dsDesc = {};
+	dsDesc.DepthEnable = TRUE;                          // 깊이 테스트 켜기
+	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL; // 깊이 버퍼에 쓰기 허용
+	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;           // 더 가까우면 통과
+
+	dsDesc.StencilEnable = FALSE;                       // 지금은 스텐실은 안 씀
+	HR(md3dDevice->CreateDepthStencilState(&dsDesc, &m_pDepthStencilState));
+
 }
  
 LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -356,6 +370,9 @@ bool D3DApp::InitMainWindow()
     AdjustWindowRect(&R, WS_OVERLAPPEDWINDOW, false);
 	int width  = R.right - R.left;
 	int height = R.bottom - R.top;
+
+	g_iWidth = width;
+	g_iHeight = height;
 
 	mhMainWnd = CreateWindow(L"D3DWndClassName", mMainWndCaption.c_str(), 
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, width, height, 0, 0, mhAppInst, 0); 

@@ -66,6 +66,7 @@ protected:
 	ID3D11RenderTargetView* mRenderTargetView;
 	ID3D11DepthStencilView* mDepthStencilView;
 	D3D11_VIEWPORT mScreenViewport;
+	ID3D11DepthStencilState* m_pDepthStencilState;
 
 	// Derived class should set these in derived constructor to customize starting values.
 	std::wstring mMainWndCaption;

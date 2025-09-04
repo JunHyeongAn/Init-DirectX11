@@ -13,6 +13,11 @@ using namespace std;
 
 #include "Macro.h"
 
+extern _uint g_iWidth;
+extern _uint g_iHeight;
+extern _matrix g_ViewMatrix;
+extern _matrix g_ProjMatrix;
+
 typedef struct VertexPosColor {
 	_float3 vPos;
 	_float4 vColor;

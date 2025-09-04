@@ -155,6 +155,7 @@
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BoxBuffer.cpp" />
     <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Base.h" />
     <ClInclude Include="BoxBuffer.h" />
     <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GameObject.h" />
@@ -184,7 +186,7 @@
     <ClInclude Include="VIBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="VertexShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>

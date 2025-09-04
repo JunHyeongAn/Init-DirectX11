@@ -33,6 +33,7 @@ protected:
 
 public:
     virtual void Begin(_uint _iPassNum) PURE;
+    LPD3D11EFFECT Get_Effect() const;
 
 protected:
     // CComponent을(를) 통해 상속됨

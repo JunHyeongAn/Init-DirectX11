@@ -94,27 +94,27 @@ HRESULT CBoxBuffer::Init()
 	m_iIndexNum = 36;
 
 	UINT indecies[] = {
-		// front face
+		// Front face (z = -1)
 		0, 1, 2,
 		0, 2, 3,
 
-		// back face
+		// Back face (z = +1)
 		4, 6, 5,
 		4, 7, 6,
 
-		// left face
+		// Left face (x = -1)
 		4, 5, 1,
 		4, 1, 0,
 
-		// right face
+		// Right face (x = +1)
 		3, 2, 6,
 		3, 6, 7,
 
-		// top face
+		// Top face (y = +1)
 		1, 5, 6,
 		1, 6, 2,
 
-		// bottom face
+		// Bottom face (y = -1)
 		4, 0, 3,
 		4, 3, 7
 	};
@@ -160,6 +160,8 @@ void CBoxBuffer::Bind()
 	m_pContext->IASetIndexBuffer(
 		m_pIB, DXGI_FORMAT_R32_UINT, 0
 	);
+
+	
 }
 
 void CBoxBuffer::Render()

@@ -14,6 +14,8 @@ protected:
 	ID3D11Device*			m_pDevice;
 	ID3D11DeviceContext*	m_pContext;
 
+	class CTransform*		m_pTransformCom{ nullptr };
+
 	unordered_map<wstring, CComponent*> m_componentMap;
 
 public:
@@ -23,6 +25,9 @@ public:
 	virtual _uint	Update(_float _fDeltaTime)		PURE;
 	virtual _uint	Late_Update()	PURE;
 	virtual HRESULT Render()		PURE;
+	CComponent* Find_Component(const wstring& _pTag);
+	void Set_Pos(_fvector _vPos);
+	void Set_Scale(_fvector _vScale);
 
 protected:
 	// CBase을(를) 통해 상속됨

@@ -8,6 +8,10 @@ private:
 	CBoxObject(CBoxObject& _pPrototype);
 	virtual ~CBoxObject() = default;
 
+private:
+	class CVIBuffer*	m_pVIBufferCom{ nullptr };
+	class CShader*		m_pShaderCom{ nullptr };
+
 public:
 	// CGameObject을(를) 통해 상속됨
 	HRESULT Init()			override;

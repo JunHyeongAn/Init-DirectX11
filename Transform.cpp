@@ -13,6 +13,13 @@ CTransform::CTransform(CTransform& _pPrototype)
 {
 }
 
+HRESULT CTransform::Init() 
+{
+	XMStoreFloat4x4(&m_WorldMatrix, XMMatrixIdentity());
+
+	return S_OK;
+}
+
 void CTransform::Move_Forward(_float _fDeltaTime)
 {
 	Move(TRANSITIONS_STATE::LOOK, _fDeltaTime);
@@ -31,6 +38,11 @@ void CTransform::Move_Right(_float _fDeltaTime)
 void CTransform::Move_Backward(_float _fDeltaTime)
 {
 	Move(TRANSITIONS_STATE::RIGHT, _fDeltaTime, TRUE);
+}
+
+void CTransform::Set_Position(_fvector _vPos)
+{
+	Set_State(TRANSITIONS_STATE::POSITION, _vPos);
 }
 
 void CTransform::Rotation(_fvector _vAxis, _float _fAngle, _float _fDeltaTime)
@@ -54,6 +66,25 @@ _float3 CTransform::Get_Scale() const
 	return vScale;
 }
 
+void CTransform::Set_Scale(_fvector _vScale)
+{
+	_vector vRight	= Get_State(TRANSITIONS_STATE::RIGHT);
+	_vector vUp		= Get_State(TRANSITIONS_STATE::UP);
+	_vector VLook	= Get_State(TRANSITIONS_STATE::LOOK);
+
+	vRight	= XMVector3Normalize(vRight);
+	vUp		= XMVector3Normalize(vUp);
+	VLook	= XMVector3Normalize(VLook);
+
+	vRight *= XMVectorGetX(_vScale);
+	vUp *= XMVectorGetY(_vScale);
+	VLook *= XMVectorGetZ(_vScale);
+
+	Set_State(TRANSITIONS_STATE::RIGHT, vRight);
+	Set_State(TRANSITIONS_STATE::UP, vUp);
+	Set_State(TRANSITIONS_STATE::LOOK, VLook);
+}
+
 _vector CTransform::Get_State(TRANSITIONS_STATE _eState) const
 {
 	return XMLoadFloat4x4(&m_WorldMatrix).r[ENUM_CLASS(_eState)];
@@ -62,6 +93,11 @@ _vector CTransform::Get_State(TRANSITIONS_STATE _eState) const
 void CTransform::Set_State(TRANSITIONS_STATE _eState, _fvector _vValue)
 {
 	XMStoreFloat4(reinterpret_cast<_float4*>(m_WorldMatrix.m[ENUM_CLASS(_eState)]), _vValue);
+}
+
+_matrix CTransform::Get_World() const
+{
+	return XMLoadFloat4x4(&m_WorldMatrix);
 }
 
 void CTransform::Move(TRANSITIONS_STATE _eDir, _float _fDeltaTime, _bool _bOpposite)
@@ -97,6 +133,22 @@ void CTransform::Rotate(_fvector _vAxis, _float _fRotateRate, _float _fDeltaTime
 	Set_State(TRANSITIONS_STATE::LOOK, vLook);
 }
 
+CTransform* CTransform::Create(ID3D11Device* _pDevice, ID3D11DeviceContext* _pContext) 
+{
+	CTransform* pTransform = new CTransform(_pDevice, _pContext);
+
+	if (!pTransform) {
+		MSG_BOX("CTransform Create Failed!!");
+		return nullptr;
+	}
+
+	if (FAILED(pTransform->Init())) {
+		MSG_BOX("CTransform Init Failed!!");
+		return nullptr;
+	}
+
+	return pTransform;
+}
 
 void CTransform::Free()
 {
