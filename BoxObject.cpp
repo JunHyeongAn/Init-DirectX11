@@ -73,8 +73,8 @@ HRESULT CBoxObject::Render()
 		m_componentMap.find(L"Shader")->second
 	);
 
-	pShader->Begin(0);
 	pBoxBuf->Bind();
+	pShader->Begin(0);
 	pBoxBuf->Render();
 
 	return E_NOTIMPL;

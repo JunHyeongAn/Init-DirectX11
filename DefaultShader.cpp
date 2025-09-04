@@ -70,6 +70,11 @@ HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 	D3DX11_TECHNIQUE_DESC tTechDesc;
 	LPD3D11EFFECTTECHNIQUE pTech = m_pEffect->GetTechniqueByName(_pDesc.szTechName);
 
+	if (!pTech || !pTech->IsValid()) {
+		MSG_BOX("Tech is not valid!!");
+		return E_FAIL;
+	}
+
 	pTech->GetDesc(&tTechDesc);
 
 	m_iNumPasses = tTechDesc.Passes;
@@ -105,7 +110,7 @@ void CDefaultShader::Begin(_uint _iPassNum)
 	m_pEffect
 		->GetTechniqueByName(m_tDesc.szTechName)
 		->GetPassByIndex(_iPassNum)
-		->Apply(0, m_pContext);
+		->Apply(0, m_pContext); 
 }
 
 void CDefaultShader::Free()

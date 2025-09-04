@@ -125,7 +125,7 @@ HRESULT CBoxBuffer::Init()
 	indexDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexDesc.CPUAccessFlags = 0;
 	indexDesc.MiscFlags = 0;
-	indexDesc.StructureByteStride = 2;
+	indexDesc.StructureByteStride = 0;
 
 	D3D11_SUBRESOURCE_DATA indexData{};
 	indexData.pSysMem = indecies;
@@ -147,12 +147,14 @@ HRESULT CBoxBuffer::Init()
 
 void CBoxBuffer::Bind()
 {
+	UINT offset = 0;
+
 	m_pContext->IASetVertexBuffers(
 		0,
 		1,
 		&m_pVB,
 		&m_iVertexStride,
-		0
+		&offset
 	);
 
 	m_pContext->IASetIndexBuffer(
@@ -162,7 +164,7 @@ void CBoxBuffer::Bind()
 
 void CBoxBuffer::Render()
 {
-	
+	m_pContext->DrawIndexed(m_iIndexNum, 0, 0);
 }
 
 
