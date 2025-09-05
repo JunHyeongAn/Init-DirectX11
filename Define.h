@@ -1,5 +1,7 @@
 #pragma once
 #include "d3dx11Effect.h"
+#include "DDSTextureLoader.h"
+#include "WICTextureLoader.h"
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
 #include <map>

@@ -16,6 +16,11 @@ typedef XMVECTOR			_vector;
 typedef FXMVECTOR			_fvector;
 
 // ¼ÎÀÌ´õ¿ë
-typedef ID3DX11EffectMatrixVariable* _lpEffectMatrix;
+typedef ID3DX11EffectMatrixVariable*	_lpEffectMatrix;
+typedef D3D11_INPUT_ELEMENT_DESC		_inputDesc;
 
 #define PURE = 0
+#define _inputFloat3 DXGI_FORMAT_R32G32B32_FLOAT
+#define _inputFloat4 DXGI_FORMAT_R32G32B32A32_FLOAT
+
+#define TEXTURE_FILE_PATH TEXT("../Resource/Texture/")

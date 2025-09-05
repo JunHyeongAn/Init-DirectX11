@@ -67,10 +67,6 @@ HRESULT CDefaultShader::Init(SHADER_DESC& _pDesc)
 		return E_FAIL;
 	}
 
-	/*hr = D3DX11CreateEffectFromMemory(
-
-	)*/
-
 	D3DX11_TECHNIQUE_DESC tTechDesc;
 	LPD3D11EFFECTTECHNIQUE pTech = m_pEffect->GetTechniqueByName(_pDesc.szTechName);
 

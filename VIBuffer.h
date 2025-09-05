@@ -3,12 +3,19 @@
 #include "Component.h"
 
 namespace Layout {
-	static const D3D11_INPUT_ELEMENT_DESC PosColor[] = {
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	static const _inputDesc PosColor[] = {
+		{ "POSITION", 0, _inputFloat3, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR",    0, _inputFloat4, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
 	static const _uint PosColorCnt = _countof(PosColor);
+
+	static const _inputDesc PosTexture1[] = {
+		{ "POSITION", 0, _inputFloat3, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, _inputFloat3, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	};
+
+	static const _uint PosTextureCnt = _countof(PosTexture1);
 }
 
 class CVIBuffer :public CComponent
